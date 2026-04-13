@@ -8,10 +8,9 @@ export function mountHome(
   container.innerHTML = `
     <div class="screen home-screen">
       <h1>逆ポートレート</h1>
-      <p class="subtitle">前景をぼかして背景はシャープに</p>
       <div class="btn-group">
-        <button id="btn-camera" class="btn btn-primary">📷 写真を撮る</button>
-        <button id="btn-picker" class="btn btn-secondary">🖼 画像を選ぶ</button>
+        <button id="btn-camera" class="btn btn-primary">写真撮影</button>
+        <button id="btn-picker" class="btn btn-secondary">画像選択</button>
       </div>
     </div>
   `;
