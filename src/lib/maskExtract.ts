@@ -9,11 +9,12 @@ export async function getForegroundMask(
     sourceCanvas.toBlob((b) => b ? resolve(b) : reject(new Error('toBlob failed')), 'image/png');
   });
 
-  const maskBlob = await removeBackground(inputBlob, {
+  // removeBackground returns PNG with alpha=255 for foreground, alpha=0 for background
+  // We use this alpha channel directly as the foreground mask
+  const resultBlob = await removeBackground(inputBlob, {
     model: 'isnet_fp16',
     output: {
       format: 'image/png',
-      type: 'mask',
     },
     progress: (_key: string, current: number, total: number) => {
       if (onProgress && total > 0) {
@@ -22,7 +23,7 @@ export async function getForegroundMask(
     },
   });
 
-  const url = URL.createObjectURL(maskBlob);
+  const url = URL.createObjectURL(resultBlob);
   const img = new Image();
   await new Promise<void>((resolve, reject) => {
     img.onload = () => resolve();
