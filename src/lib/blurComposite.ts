@@ -1,4 +1,4 @@
-const BLUR_RADIUS = 14;
+const BLUR_RADIUS = 5;
 
 export function applyReversePortrait(
   sourceCanvas: HTMLCanvasElement,
