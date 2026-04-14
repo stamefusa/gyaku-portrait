@@ -75,7 +75,15 @@ export function downloadCanvas(
   canvas: HTMLCanvasElement,
   filename = 'gyaku-portrait.jpg',
 ): void {
-  canvas.toBlob(
+  const flipped = document.createElement('canvas');
+  flipped.width = canvas.width;
+  flipped.height = canvas.height;
+  const ctx = flipped.getContext('2d')!;
+  ctx.translate(canvas.width, 0);
+  ctx.scale(-1, 1);
+  ctx.drawImage(canvas, 0, 0);
+
+  flipped.toBlob(
     (blob) => {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
